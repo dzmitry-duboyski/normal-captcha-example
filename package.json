@@ -1,0 +1,26 @@
+{
+  "name": "recaptcha-example",
+  "version": "1.0.0",
+  "description": "solve reCAPTCHA with puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "start": "env-cmd node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzmitry-duboyski/reCAPTCHA-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzmitry-duboyski/reCAPTCHA-example/issues"
+  },
+  "homepage": "https://github.com/dzmitry-duboyski/reCAPTCHA-example#readme",
+  "dependencies": {
+    "2captcha": "^3.0.5",
+    "chalk": "3.0.0",
+    "env-cmd": "^10.1.0",
+    "puppeteer": "^17.1.1"
+  }
+}
