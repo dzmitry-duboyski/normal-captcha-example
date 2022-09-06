@@ -18,7 +18,7 @@ const solver = new Captcha.Solver(APIKEY);
   const element = await page.$('img[alt="normal captcha example"]')
   await element.screenshot({path: './captchas/image.png'})
   
-  const getImageCapcha = async () => {
+  const getCapchaAnswer = async () => {
     try {
       const res = await solver.imageCaptcha(fs.readFileSync('./captchas/image.png', 'base64'))
       return res.data
@@ -27,7 +27,7 @@ const solver = new Captcha.Solver(APIKEY);
     }
   }
 
-  const captchaAnswer = await getImageCapcha()
+  const captchaAnswer = await getCapchaAnswer()
   console.log('captchaAnswer:' + captchaAnswer)
 
   await page.type('#simple-captcha-field', captchaAnswer, {delay: 500})
