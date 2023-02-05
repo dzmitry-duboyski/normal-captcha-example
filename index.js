@@ -35,7 +35,7 @@ const solver = new Captcha.Solver(APIKEY);
     document.querySelector('button[type=submit]').click()
   })
 
-  const huli = await page.evaluate(() => {
+  const getResult = await page.evaluate(() => {
       let result
 
       const errorElem = document.querySelector('._1Or-n9RKBk1X_Bc_vZYSf4')
@@ -56,11 +56,11 @@ const solver = new Captcha.Solver(APIKEY);
       }
   })
 
-  const isSuccess = huli == 'Captcha is passed successfully!'
+  const isSuccess = getResult == 'Captcha is passed successfully!'
   if(isSuccess) {
-    console.log(chalk.bgGreen(huli))
+    console.log(chalk.bgGreen(getResult))
   } else {
-    console.log(chalk.bgRed(huli))
+    console.log(chalk.bgRed(getResult))
   }
 
   browser.close()
