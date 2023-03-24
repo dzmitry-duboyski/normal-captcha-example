@@ -6,4 +6,7 @@ create an .env file in the root of the project and put your 2captcha apikey in i
 `APIKEY=yourApiKey`
 
 #### Usage
+
+`npm i`
+
 `npm run start`
