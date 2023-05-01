@@ -1,11 +1,16 @@
 {
-  "name": "recaptcha-example",
+  "name": "solving-for-image-captcha",
   "version": "1.0.0",
-  "description": "solve reCAPTCHA with puppeteer",
+  "description": "Solve image captcha using Puppeteer",
+  "keywords": [
+    "captcha solving",
+    "image capthca",
+    "puppeteer",
+    "base64"
+  ],
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "env-cmd node index.js"
   },
   "repository": {
     "type": "git",
