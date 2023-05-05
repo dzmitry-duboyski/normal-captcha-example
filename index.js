@@ -1,13 +1,13 @@
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 const chalk = require("chalk");
-const Captcha = require("2captcha");
-const APIKEY = process.env.APIKEY;
+const Captcha = require("2captcha-ts");
+const APIKEY = "<Your 2captcha APIKEY>";
 const solver = new Captcha.Solver(APIKEY);
 
 (async () => {
   const puppeteerSettings = {
-    headless: true,
+    headless: false,
   };
 
   const browser = await puppeteer.launch(puppeteerSettings);
@@ -17,14 +17,15 @@ const solver = new Captcha.Solver(APIKEY);
   await page.waitForSelector('img[alt="normal captcha example"]');
   const element = await page.$('img[alt="normal captcha example"]');
   // save captcha
-  await element.screenshot({ path: "./captchas/image.png" });
+  await element.screenshot({ path: "./image_captcha.png" });
 
   const getCaptchaAnswer = async () => {
     try {
       //send captcha
-      const res = await solver.imageCaptcha(
-        fs.readFileSync("./captchas/image.png", "base64")
-      );
+      const base64Captcha = fs.readFileSync("./image_captcha.png", "base64");
+      const res = await solver.imageCaptcha({
+        body: base64Captcha,
+      });
       return res.data;
     } catch (err) {
       console.log(err);
@@ -44,25 +45,21 @@ const solver = new Captcha.Solver(APIKEY);
   const getResult = await page.evaluate(() => {
     let result;
 
-    const errorElem = document.querySelector("._1Or-n9RKBk1X_Bc_vZYSf4");
-    if (!errorElem) {
-      // console.log('element not found')
-    } else {
-      console.log("errorMsg: " + errorElem.innerText);
+    const elementErrorMsg = document.querySelector("._1Or-n9RKBk1X_Bc_vZYSf4");
+    if (elementErrorMsg) {
+      console.log("errorMsg: " + elementErrorMsg.innerText);
       result = "Incorrect CAPTCHA answer, please try again.";
       return result;
     }
 
-    const successElem = document.querySelector(".j4U8b8WW7BD_DOSsopoys");
-    if (!successElem) {
-      // console.log('element not found')
-    } else {
+    const elementSuccessMsg = document.querySelector(".j4U8b8WW7BD_DOSsopoys");
+    if (elementSuccessMsg) {
       result = "Captcha is passed successfully!";
       return result;
     }
   });
 
-  const isSuccess = getResult == "Captcha is passed successfully!";
+  const isSuccess = getResult === "Captcha is passed successfully!";
   if (isSuccess) {
     console.log(chalk.bgGreen(getResult));
   } else {
