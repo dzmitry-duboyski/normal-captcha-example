@@ -1,18 +1,35 @@
-# normal-captcha-example
+# How to automate an image-based captcha solution in JavaScript
 
-In this example, you can see how you can automate solve the image-based captcha problem using [Puppeteer](https://pptr.dev/) and 2captcha.
+## Description
+In this example, you can see how automate an image-based captcha solution in JavaScript using [Puppeteer](https://pptr.dev/) and the 2captcha service.
 [Puppeteer](https://pptr.dev/) is Node.js library using for automation. [2captcha](https://2captcha.com) is service used to solve the captcha.
 
-#### Presetting
+### Presetting
 Set your `API KEY` in the file  [./index.js#L3](./index.js#L5)
 
 `APIKEY=yourApiKey`
 
-#### Usage
+### Usage
 
 `npm i`
 
 `npm run start`
+
+### Example
+```js
+  const getCaptchaAnswer = async () => {
+    try {
+      //send captcha
+      const base64Captcha = fs.readFileSync("./image_captcha.png", "base64");
+      const res = await solver.imageCaptcha({
+        body: base64Captcha,
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+```
 
 Screenshot:
 
