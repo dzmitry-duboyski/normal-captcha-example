@@ -6,7 +6,8 @@
     "captcha solving",
     "image capthca",
     "puppeteer",
-    "base64"
+    "base64",
+    "JavaScript",
   ],
   "main": "index.js",
   "scripts": {
